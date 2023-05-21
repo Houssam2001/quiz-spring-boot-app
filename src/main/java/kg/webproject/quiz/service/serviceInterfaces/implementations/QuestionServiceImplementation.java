@@ -17,17 +17,17 @@ public class QuestionServiceImplementation implements QuestionService {
 
     private ModelMapper modelMapper = new ModelMapper();
 
-    public QuestionServiceImplementation(QuestionRepository questionRepository){
+    public QuestionServiceImplementation(QuestionRepository questionRepository) {
         _questionRepository = questionRepository;
     }
 
     @Override
     public QuestionDto createQuestion(QuestionDto question) {
 
-        if(_questionRepository.findByQuestionContent(question.getQuestionContent()) != null)
+        if (_questionRepository.findByQuestionContent(question.getQuestionContent()) != null)
             throw new RuntimeException("Question already exists in Database");
-        
-        for(AnswerDto answer: question.getAnswers()){
+
+        for (AnswerDto answer : question.getAnswers()) {
             answer.setQuestion(question);
         }
 
@@ -43,7 +43,6 @@ public class QuestionServiceImplementation implements QuestionService {
         return modelMapper.map(_questionRepository.findById(id), QuestionDto.class);
     }
 
-
     @Override
     public String deleteQuestionById(long id) {
         _questionRepository.deleteById(id);
@@ -51,28 +50,30 @@ public class QuestionServiceImplementation implements QuestionService {
         return "Operation successful";
     }
 
-//    @Override
-//    public QuestionDto updateQuestion(long Id, QuestionDto question) {
-////        QuestionDto questionUpdate = modelMapper.map(question, QuestionDto.class);
-////
-////        return modelMapper.map(_questionRepository.findById(Id), (Type) QuestionResponseModel.class);
-//        QuestionDto returnValue = new QuestionDto();
-//
-//        QuestionEntity questionEntity = _questionRepository.findById(Id);
-//
-//        questionEntity.setQuestionContent(question.getQuestionContent());
-////        questionEntity.setAnswers(question.getAnswers());
-//
-//        QuestionEntity updatedQuestionDetails = _questionRepository.save(questionEntity);
-//        BeanUtils.copyProperties(updatedQuestionDetails, returnValue);
-//
-//        return returnValue;
-//    }
+    // @Override
+    // public QuestionDto updateQuestion(long Id, QuestionDto question) {
+    //// QuestionDto questionUpdate = modelMapper.map(question, QuestionDto.class);
+    ////
+    //// return modelMapper.map(_questionRepository.findById(Id), (Type)
+    // QuestionResponseModel.class);
+    // QuestionDto returnValue = new QuestionDto();
+    //
+    // QuestionEntity questionEntity = _questionRepository.findById(Id);
+    //
+    // questionEntity.setQuestionContent(question.getQuestionContent());
+    //// questionEntity.setAnswers(question.getAnswers());
+    //
+    // QuestionEntity updatedQuestionDetails =
+    // _questionRepository.save(questionEntity);
+    // BeanUtils.copyProperties(updatedQuestionDetails, returnValue);
+    //
+    // return returnValue;
+    // }
 
     @Override
     public Set<QuestionDto> getAllQuestions() {
         Set<QuestionDto> returnSet = new HashSet<>();
-        for(QuestionEntity question: _questionRepository.findAll()){
+        for (QuestionEntity question : _questionRepository.findAll()) {
             QuestionDto questionDto = modelMapper.map(question, QuestionDto.class);
             returnSet.add(questionDto);
         }
