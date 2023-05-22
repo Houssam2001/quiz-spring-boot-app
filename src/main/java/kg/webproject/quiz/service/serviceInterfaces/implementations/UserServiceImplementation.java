@@ -1,9 +1,11 @@
 package kg.webproject.quiz.service.serviceInterfaces.implementations;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kg.webproject.quiz.io.entities.UserEntity;
@@ -13,6 +15,7 @@ import kg.webproject.quiz.shared.dto.UserDto;
 
 @Service
 public class UserServiceImplementation implements UserService {
+    @Autowired
     private UserRepository _UserRepository;
 
     public UserServiceImplementation(UserRepository _UserRepository) {
@@ -44,12 +47,11 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public String updateScore(int score, long id) {
-        UserEntity user = _UserRepository.findByID(id);
+        Optional<UserEntity> user = _UserRepository.findById(id);
         UserDto userDto = modelMapper.map(user, UserDto.class);
         userDto.setScores(score);
-        // UserEntity returnQuestion = _UserRepository.save(modelMapper.map(userDto, UserEntity.class));
-
-        return "score updated successfully";    
+        UserEntity returnUser = _UserRepository.save(modelMapper.map(userDto, UserEntity.class));
+        return "score of"+returnUser+" updated successfully";    
     }
 
     @Override
@@ -58,9 +60,8 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public String deleteUser(long id) {
+    public String deleteUser(long id){
         _UserRepository.deleteById(id);
-
         return "Operation successful";
     }
 

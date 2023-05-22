@@ -21,14 +21,12 @@ public class UserEntity implements Serializable {
     @Column(nullable = false)
     private int score;
 
-    @Column(nullable = false)
-    private Date scoreDate;
+    
 
     public UserEntity(long id, String username, int score, Date scoreDate) {
         this.id = id;
         this.username = username;
         this.score = score;
-        this.scoreDate = scoreDate;
     }
 
     public long getId() {
@@ -55,12 +53,5 @@ public class UserEntity implements Serializable {
         this.score = score;
     }
 
-    public Date getScoreDate() {
-        return scoreDate;
-    }
-
-    public void setScoreDate(Date scoreDate) {
-        this.scoreDate = scoreDate;
-    }
-
+   
 }

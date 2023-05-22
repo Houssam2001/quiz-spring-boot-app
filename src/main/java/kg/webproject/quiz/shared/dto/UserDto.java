@@ -1,14 +1,14 @@
 package kg.webproject.quiz.shared.dto;
 
 public class UserDto {
-    private long id;
+    private long Id;
     private String username;
     private int scores;
     public long getId() {
-        return id;
+        return Id;
     }
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long Id) {
+        this.Id = Id;
     }
     public String getUsername() {
         return username;

@@ -1,15 +1,15 @@
 package kg.webproject.quiz.ui.models.response;
 
 public class UserResponseModel {
-    private String id;
+    private String Id;
     private String username;
     private String scores;
     
     public String getId() {
-        return id;
+        return Id;
     }
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String Id) {
+        this.Id = Id;
     }
     public String getUsername() {
         return username;

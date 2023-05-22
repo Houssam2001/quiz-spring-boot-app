@@ -1,6 +1,8 @@
 package kg.webproject.quiz.ui.controllers;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.modelmapper.ModelMapper;
@@ -15,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.micrometer.core.instrument.Meter.Id;
 import io.swagger.annotations.ApiOperation;
+import kg.webproject.quiz.io.entities.UserEntity;
+import kg.webproject.quiz.io.repositories.UserRepository;
 import kg.webproject.quiz.service.serviceInterfaces.UserService;
 import kg.webproject.quiz.shared.dto.QuestionDto;
 import kg.webproject.quiz.shared.dto.UserDto;
@@ -30,6 +35,7 @@ public class userController {
     
     @Autowired
     UserService userService;
+    UserRepository Userrepo;
     
     private ModelMapper modelMapper = new ModelMapper();
 
@@ -56,12 +62,20 @@ public class userController {
         return returnValue;
     }
 
-    @CrossOrigin
-    @GetMapping(path = "/{id}")
-    @ApiOperation(value = "getUserById")
-    public UserResponseModel getQuestionById(@PathVariable long id){
-        return modelMapper.map(userService.getUserById(id), UserResponseModel.class);
+    @GetMapping("/{id}")
+    public Optional<UserEntity> getUserById(long id){
+        return Userrepo.findById(id);
     }
+
+
+
+
+    // @CrossOrigin
+    // @GetMapping(path = "/{id}")
+    // @ApiOperation(value = "getUserById")
+    // public UserResponseModel getQuestionById(@PathVariable long id){
+    //     return modelMapper.map(userService.getUserById(id), UserResponseModel.class);
+    // }
 
     @CrossOrigin
     @DeleteMapping(path = "/{id}")
