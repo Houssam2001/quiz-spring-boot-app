@@ -1,7 +1,6 @@
 package kg.webproject.quiz.ui.controllers;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -17,16 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.micrometer.core.instrument.Meter.Id;
 import io.swagger.annotations.ApiOperation;
 import kg.webproject.quiz.io.entities.UserEntity;
 import kg.webproject.quiz.io.repositories.UserRepository;
 import kg.webproject.quiz.service.serviceInterfaces.UserService;
-import kg.webproject.quiz.shared.dto.QuestionDto;
 import kg.webproject.quiz.shared.dto.UserDto;
-import kg.webproject.quiz.ui.models.request.QuestionRequestModel;
 import kg.webproject.quiz.ui.models.request.UserRequestModel;
-import kg.webproject.quiz.ui.models.response.QuestionResponseModel;
 import kg.webproject.quiz.ui.models.response.UserResponseModel;
 
 @RestController
@@ -46,7 +41,6 @@ public class userController {
         UserDto userDto = modelMapper.map(user, UserDto.class);
 
         return modelMapper.map(userService.createUser(userDto),UserResponseModel.class);
-
     }
 
     @CrossOrigin
