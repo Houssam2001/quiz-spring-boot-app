@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
@@ -35,8 +36,7 @@ public class userController {
     private ModelMapper modelMapper = new ModelMapper();
 
     @CrossOrigin
-    @PostMapping
-    @ApiOperation(value = "createUser")
+    @RequestMapping(value = "createUser", method = RequestMethod.POST)
     public UserResponseModel createUser(@RequestBody UserRequestModel user){
         UserDto userDto = modelMapper.map(user, UserDto.class);
 
@@ -56,24 +56,25 @@ public class userController {
         return returnValue;
     }
 
-    @GetMapping("/{id}")
-    public Optional<UserEntity> getUserById(long id){
-        return Userrepo.findById(id);
-    }
-
-
-
-
     // @CrossOrigin
-    // @GetMapping(path = "/{id}")
-    // @ApiOperation(value = "getUserById")
-    // public UserResponseModel getQuestionById(@PathVariable long id){
-    //     return modelMapper.map(userService.getUserById(id), UserResponseModel.class);
+    // @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    // public Optional<UserEntity> getUserById(@PathVariable long id){
+    //     return Userrepo.(id);
     // }
+
+
+
+
+    @CrossOrigin
+    @GetMapping(path = "/{id}")
+    @ApiOperation(value = "getUserById")
+    public UserResponseModel getQuestionById(@PathVariable long id){
+        return modelMapper.map(userService.getUserById(id), UserResponseModel.class);
+    }
 
     @CrossOrigin
     @DeleteMapping(path = "/{id}")
-    @ApiOperation(value = "deleteUsernById")
+    @ApiOperation(value = "deleteUserById")
     public String deleteUsernById(@PathVariable long id){
 
         userService.deleteUser(id);

@@ -26,8 +26,8 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public UserDto createUser(UserDto user) {
-        if (_UserRepository.findByUsername(user.getUsername()) != null)
-            throw new RuntimeException("username already exists in Database");
+        // if (_UserRepository.(user.getId()))
+        //     throw new RuntimeException("username already exists in Database");
 
         UserEntity userEntity = modelMapper.map(user, UserEntity.class);
         UserDto returnValue = modelMapper.map(_UserRepository.save(userEntity), UserDto.class);
@@ -49,7 +49,7 @@ public class UserServiceImplementation implements UserService {
     public String updateScore(int score, long id) {
         Optional<UserEntity> user = _UserRepository.findById(id);
         UserDto userDto = modelMapper.map(user, UserDto.class);
-        userDto.setScores(score);
+        userDto.setScore(score);
         UserEntity returnUser = _UserRepository.save(modelMapper.map(userDto, UserEntity.class));
         return "score of"+returnUser+" updated successfully";    
     }

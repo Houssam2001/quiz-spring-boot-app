@@ -3,7 +3,7 @@ package kg.webproject.quiz.shared.dto;
 public class UserDto {
     private long Id;
     private String username;
-    private int scores;
+    private int score;
     public long getId() {
         return Id;
     }
@@ -16,10 +16,10 @@ public class UserDto {
     public void setUsername(String username) {
         this.username = username;
     }
-    public int getScores() {
-        return scores;
+    public int getScore() {
+        return score;
     }
-    public void setScores(int scores) {
-        this.scores = scores;
+    public void setScore(int score) {
+        this.score = score;
     }
 }

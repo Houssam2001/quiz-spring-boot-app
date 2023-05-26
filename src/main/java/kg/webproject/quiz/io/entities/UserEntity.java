@@ -1,7 +1,6 @@
 package kg.webproject.quiz.io.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +10,7 @@ import javax.persistence.Id;
 @Entity(name = "users")
 public class UserEntity implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue
     private long id;
@@ -23,7 +23,10 @@ public class UserEntity implements Serializable {
 
     
 
-    public UserEntity(long id, String username, int score, Date scoreDate) {
+    public UserEntity() {
+    }
+
+    public UserEntity(long id, String username, int score) {
         this.id = id;
         this.username = username;
         this.score = score;

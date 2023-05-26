@@ -3,7 +3,7 @@ package kg.webproject.quiz.ui.models.response;
 public class UserResponseModel {
     private String Id;
     private String username;
-    private String scores;
+    private String score;
     
     public String getId() {
         return Id;
@@ -17,11 +17,11 @@ public class UserResponseModel {
     public void setUsername(String username) {
         this.username = username;
     }
-    public String getScores() {
-        return scores;
+    public String getScore() {
+        return score;
     }
-    public void setScores(String scores) {
-        this.scores = scores;
+    public void setScore(String score) {
+        this.score = score;
     }
     
 }
